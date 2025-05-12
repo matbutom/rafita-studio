@@ -1,6 +1,6 @@
 ---
 title: Rafita Studio
-layout: base.njk
+layout: default.njk
 ---
 
 # ¡Hola! 👋
