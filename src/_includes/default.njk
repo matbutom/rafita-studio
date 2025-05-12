@@ -3,43 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <title>{% if title %}{{ title }} | {% endif %}Rafita Studio</title>
-  <!-- Agregar Google Font (opcional si lo necesitas) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Fuente Articulat CF desde Adobe Fonts -->
+  <link rel="stylesheet" href="https://use.typekit.net/iic6jga.css">
+
   <style>
-    /* Aplicar la fuente sans-serif 'Roboto' (opcional) */
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'articulat-cf', sans-serif;
       margin: 0;
       padding: 0;
-      text-align: center; /* Centrar todo el contenido */
     }
 
-    /* Estilos para el logo */
-    header {
-      margin-top: 30px; /* Espacio en la parte superior */
-      margin-left: 30px;
-      text-align: left;
+    .top-bar {
+      background-color: #ffbcf2;
+      height: 100px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+      box-sizing: border-box;
     }
 
-    header img {
-      width: 200px; /* Ajusta el tamaño del logo */
-      height: auto; /* Mantener la proporción */
+    .logo img {
+      width: 150px;
+      height: auto;
+    }
+
+    .logo img:hover {
+     transform: scale(1.1) rotate(-2deg);
+   }
+
+    .menu-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .menu-links a {
+      text-decoration: none;
+      color: #ef0d45;
+      font-weight: 300; /* Light */
+      font-size: 1.3rem; /* Más grande */
+      transition: font-weight 0.3s ease, color 0.3s ease;
+    }
+
+    .menu-links a:hover {
+      font-weight: 900; /* Bold al pasar el mouse */
+    }
+
+    main {
+      padding-top: 200px;
+      text-align: center;
     }
 
     footer {
-      margin-top: 50px;
-      margin-left: 50px;
+      margin-top: 30px;
+      margin-left: 0px;
       font-size: 0.8rem;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        height: auto;
+      }
+
+      .menu-links {
+        margin-top: 10px;
+        flex-direction: column;
+        gap: 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="/images/rafitaStudio_logo2025.png" alt="Rafita Studio Logo">
-  </header>
+  <div class="top-bar">
+    <div class="logo">
+      <img src="/images/rafitaStudio_logo2025.png" alt="Rafita Studio Logo">
+    </div>
+    <nav class="menu-links">
+      <a href="#">About</a>
+      <a href="#">Work</a>
+      <a href="#">Contact us</a>
+    </nav>
+  </div>
 
   <main>
-    <!-- Aquí podría ir contenido adicional si lo agregamos después -->
+    <!-- Contenido principal -->
   </main>
 
   <footer>
