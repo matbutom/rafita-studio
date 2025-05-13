@@ -16,7 +16,7 @@
 
     .top-bar {
       background-color: #ffbcf2;
-      height: 100px;
+      height: 80px;
       width: 100%;
       position: fixed;
       top: 0;
@@ -30,57 +30,108 @@
     }
 
     .logo img {
-      width: 150px;
+      width: 120px;
       height: auto;
+      transition: transform 0.3s ease;
     }
 
     .logo img:hover {
-     transform: scale(1.1) rotate(-2deg);
-   }
+      transform: scale(1.1) rotate(-2deg);
+    }
 
     .menu-links {
       display: flex;
       gap: 40px;
+      align-items: center;
     }
 
     .menu-links a {
+      display: flex;
       text-decoration: none;
       color: #ef0d45;
-      font-weight: 300; /* Light */
-      font-size: 1.3rem; /* Más grande */
-      transition: font-weight 0.3s ease, color 0.3s ease;
+      font-weight: 300;
+      font-size: 1.3rem;
+      transition: font-weight 0.5s ease, color 0.5s ease;
+      align-items: center; /* Alinea verticalmente todos los elementos */
     }
 
     .menu-links a:hover {
-      font-weight: 900; /* Bold al pasar el mouse */
+      font-weight: 900;
+    }
+
+    .instagram-link {
+      display: flex;
+      align-items: center;
+    }
+
+    .instagram-icon {
+      width: 32px;
+      height: 32px;
+      filter: invert(14%) sepia(96%) saturate(6676%) hue-rotate(337deg) brightness(94%) contrast(118%);
+      transition: transform 0.3s ease;
+    }
+
+    .instagram-icon:hover {
+      transform: scale(1.1);
     }
 
     main {
-      padding-top: 200px;
+      padding-top: 100px;
       text-align: center;
     }
 
     footer {
-      margin-top: 30px;
+      margin-top: 0px;
       margin-left: 0px;
       font-size: 0.8rem;
       text-align: center;
     }
 
-    @media (max-width: 600px) {
-      .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-        height: auto;
-      }
+/* Contenedor de la sección de la galería */
+.gallery-section {
+  padding-top: 80px; /* Ajusta el margen superior */
+  padding-bottom: 40px; /* Ajusta el margen inferior */
+  background-color: #fff; /* Fondo blanco */
+}
 
-      .menu-links {
-        margin-top: 10px;
-        flex-direction: column;
-        gap: 15px;
-      }
-    }
+/* Estilo de la galería (usando Grid) */
+.gallery-masonry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 20px; /* Espacio entre las imágenes */
+  padding: 0 20px; /* Espaciado horizontal */
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* Estilo de las imágenes */
+.gallery-masonry img {
+  width: 100%; /* Las imágenes ocupan todo el espacio disponible de su columna */
+  height: 100%; /* Las imágenes tienen un 100% de altura dentro de su contenedor */
+  object-fit: contain; /* Mantener la proporción sin recortes */
+  border-radius: 8px; /* Bordes redondeados */
+  transition: transform 0.3s ease; /* Efecto hover */
+  box-sizing: border-box; /* Evitar que el padding interfiera con el tamaño de la imagen */
+}
+
+/* Efecto de hover: las imágenes se agrandan ligeramente */
+.gallery-masonry img:hover {
+  transform: scale(1.05); /* Ligeramente más grande cuando se pasa el ratón */
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 900px) {
+  .gallery-masonry {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en pantallas medianas */
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-masonry {
+    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+  }
+}
+
   </style>
 </head>
 <body>
@@ -92,11 +143,32 @@
       <a href="#">About</a>
       <a href="#">Work</a>
       <a href="#">Contact us</a>
+      <a href="https://www.instagram.com/rafita.studio/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="instagram-link">
+        <img class="instagram-icon" src="https://www.svgrepo.com/show/506668/instagram.svg" alt="Instagram">
+      </a>
     </nav>
   </div>
 
   <main>
-    <!-- Contenido principal -->
+<section class="gallery-section full-bleed-section background-width--full-bleed section-height--medium content-width--wide horizontal-alignment--center vertical-alignment--middle white" data-controller="SectionWrapperController" data-current-styles="{
+  'backgroundWidth': 'background-width--full-bleed',
+  'sectionHeight': 'section-height--medium',
+  'horizontalAlignment': 'horizontal-alignment--center',
+  'verticalAlignment': 'vertical-alignment--middle',
+  'contentWidth': 'content-width--wide',
+  'backgroundMode': 'image',
+  'backgroundImage': null
+}" data-animation="none" style="padding-top: 42.0625px;">
+  <div class="gallery-masonry">
+    <img src="/images/ilus_01.jpg" alt="Ilustración 1">
+    <img src="/images/ilus_02.jpg" alt="Ilustración 2">
+    
+    <img src="/images/ilus_03.jpg" alt="Ilustración 3">   
+    <img src="/images/ilus_05.jpg" alt="Ilustración 5">
+    <img src="/images/ilus_04.jpg" alt="Ilustración 4">
+  </div>
+</section>
+
   </main>
 
   <footer>
