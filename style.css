@@ -1,9 +1,23 @@
-body {
-  font-family: "bricolage-grotesque", sans-serif;
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  font-family: "bricolage-grotesque", sans-serif;
   background-color: #fff;
   color: #000;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  /* quitamos margin y padding porque ya están en html, body juntos */
+  /* font-family, background, color ya definidos arriba */
+  flex: 1; /* para que body ocupe el espacio disponible, si tienes más elementos fuera de body, si no, puedes quitar esto */
+}
+
+main {
+  flex: 1; /* main crece y ocupa espacio disponible */
 }
 
 .logo img {
@@ -46,12 +60,12 @@ nav a::after {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #000; /* Puedes cambiar el color si quieres */
+  background-color: #000;
   transition: width 0.3s ease;
 }
 
 nav a:hover {
-  color: #000; /* Cambia el color al pasar el mouse */
+  color: #000;
 }
 
 nav a:hover::after {
@@ -64,40 +78,34 @@ section {
 
 footer {
   text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: #555;
+  padding: 0.1rem;
+  font-size: 0.7rem;
+  color: #a5a5a5;
+  border-top: 1px solid #d4d4d4;
 }
 
-/* Estilos generales */
-body {
-  font-family: 'bricolage-grotesque', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  color: #000;
-}
-
+/* Galería con columnas */
 .gallery {
-  column-count: 3;       /* Número de columnas */
-  column-gap: 15px;      /* Espacio entre columnas */
+  column-count: 3;
+  column-gap: 15px;
   padding: 20px;
 }
 
 .gallery img {
   width: 100%;
-  margin-bottom: 15px;  /* Espacio entre imágenes verticalmente */
+  margin-bottom: 15px;
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.3s ease;
   display: block;
-  object-fit: contain;  /* Mantiene proporción */
+  object-fit: contain;
 }
 
 .gallery img:hover {
   transform: scale(1.05);
 }
 
+/* Responsividad */
 @media (max-width: 1024px) {
   .gallery {
     column-count: 3;
@@ -117,12 +125,12 @@ body {
 }
 
 .instagram-link {
-  font-weight: 400; /* Regular por defecto */
+  font-weight: 400;
   color: inherit;
   text-decoration: none;
   transition: font-weight 0.2s ease;
 }
 
 .instagram-link:hover {
-  font-weight: 700; /* Bold al hacer hover */
+  font-weight: 700;
 }
