@@ -11,17 +11,15 @@ html, body {
 }
 
 body {
-  /* quitamos margin y padding porque ya están en html, body juntos */
-  /* font-family, background, color ya definidos arriba */
-  flex: 1; /* para que body ocupe el espacio disponible, si tienes más elementos fuera de body, si no, puedes quitar esto */
+  flex: 1;
 }
 
 main {
-  flex: 1; /* main crece y ocupa espacio disponible */
+  flex: 1; 
 }
 
 .logo img {
-  height: 40px; /* ajusta a tu gusto */
+  height: 40px; 
   display: block;
 }
 
