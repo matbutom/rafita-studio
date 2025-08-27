@@ -27,12 +27,25 @@
       </ul>
     </nav>
   </header>
-  <main>
-    <section id="contact" style="padding: 4rem 2rem;">
-      <h2>Contact</h2>
-      <p>Escríbenos a <a href="mailto:contacto@rafitastudio.com">rafita.studio@gmail.com</a></p>
-    </section>
-  </main>
+<main>
+  <section id="contact" class="contact-section">
+    <h2>Hablemos! :)</h2>
+
+    <form action="mailto:rafita.studio@gmail.com" method="POST" enctype="text/plain" class="contact-form">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="subject">Asunto</label>
+      <input type="text" id="subject" name="subject" required />
+
+      <label for="message">Mensaje</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+</main>
+
   <footer>
     <p>© 2025 Rafita Studio. Todos los derechos reservados.</p>
   </footer>
