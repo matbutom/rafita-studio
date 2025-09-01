@@ -6,48 +6,116 @@
   <title>Contact - Rafita Studio</title>
   <link rel="stylesheet" href="https://use.typekit.net/iic6jga.css" />
   <link rel="stylesheet" href="style.css" />
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>...</title>
-  <link rel="stylesheet" href="https://use.typekit.net/iic6jga.css" />
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <a href="index.html" class="logo">
       <img src="assets/images/rafitaStudio_logo2025.png" alt="Rafita Studio Logo" />
     </a>
+
     <nav>
-      <ul>
+      <ul class="desktop-nav">
         <li><a href="index.html#work">Work</a></li>
+        <li>
+          <a 
+            href="https://piruetasxyz.myshopify.com/collections/rafita-studio" 
+            target="_blank"
+          >
+            Shop
+          </a>
+        </li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="contact.html" class="active">Contact</a></li>
-        <li><a href="https://instagram.com/rafita.studio" target="_blank" class="instagram-link">@rafita.studio</a></li>
+        <li>
+          <a href="https://instagram.com/rafita.studio" target="_blank" class="instagram-link">
+            @rafita.studio
+          </a>
+        </li>
       </ul>
     </nav>
+
+    <!-- botón hamburguesa -->
+    <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Abrir menú">
+      <span class="bar" aria-hidden="true"></span>
+    </button>
+
+    <!-- drawer móvil -->
+    <div id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-backdrop" data-close></div>
+      <aside class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menú">
+        <!-- flecha volver -->
+        <a href="index.html" class="back-home" aria-label="Volver a inicio">← Volver</a>
+
+        <nav aria-label="Mobile">
+          <ul class="mobile-nav" id="mobile-nav-list"></ul>
+        </nav>
+      </aside>
+    </div>
   </header>
-<main>
-  <section id="contact" class="contact-section">
-    <h2>Hablemos! :)</h2>
 
-    <form action="mailto:rafita.studio@gmail.com" method="POST" enctype="text/plain" class="contact-form">
-      <label for="name">Nombre</label>
-      <input type="text" id="name" name="name" required />
+  <main>
+    <section id="contact" class="contact-section">
+      <h2>Hablemos! :)</h2>
 
-      <label for="subject">Asunto</label>
-      <input type="text" id="subject" name="subject" required />
+      <form id="contact-form" class="contact-form">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" name="name" required />
 
-      <label for="message">Mensaje</label>
-      <textarea id="message" name="message" rows="6" required></textarea>
+        <label for="subject">Asunto</label>
+        <input type="text" id="subject" name="subject" required />
 
-      <button type="submit">Enviar</button>
-    </form>
-  </section>
-</main>
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <!-- Honeypot anti-spam -->
+        <input type="text" name="_hp" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <button type="submit">Enviar</button>
+        <p id="form-status" style="margin-top:.5rem;font-size:.9rem;"></p>
+      </form>
+    </section>
+  </main>
 
   <footer>
     <p>© 2025 Rafita Studio. Todos los derechos reservados.</p>
   </footer>
+
+  <!-- JS del menú -->
+  <script src="script.js"></script>
+
+  <!-- JS del formulario de contacto -->
+  <script>
+    const APP_URL = "https://script.google.com/macros/s/AKfycbwdkG6HR9JTUESjck6bsP_rl3kDND_m-TipNnZq02w22-kvaOc3arji4B4Jd25Tcm_ruw/exec"; // 🔹 reemplaza con tu URL real
+
+    document.getElementById("contact-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const status = document.getElementById("form-status");
+
+      // honeypot anti-spam
+      if (f._hp && f._hp.value) return;
+
+      const payload = {
+        name: f.name.value.trim(),
+        subject: f.subject.value.trim(),
+        message: f.message.value.trim(),
+        replyTo: "rafita.estudio@gmail.com"
+      };
+
+      try {
+        await fetch(APP_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        status.textContent = "¡Mensaje enviado! Gracias por escribirnos :)";
+        f.reset();
+      } catch (err) {
+        status.textContent = "No pudimos enviar el mensaje. Intenta más tarde.";
+        console.error(err);
+      }
+    });
+  </script>
 </body>
 </html>
