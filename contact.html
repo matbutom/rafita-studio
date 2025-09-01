@@ -58,8 +58,9 @@
       <h2>Hablemos! :)</h2>
 
       <form id="contact-form" class="contact-form">
-        <label for="name">Nombre</label>
-        <input type="text" id="name" name="name" required />
+        <label for="email">Tu correo</label>
+        <input type="email" id="email" name="email" required
+               autocomplete="email" placeholder="tucorreo@dominio.com" />
 
         <label for="subject">Asunto</label>
         <input type="text" id="subject" name="subject" required />
@@ -85,7 +86,7 @@
 
   <!-- JS del formulario de contacto -->
   <script>
-    const APP_URL = "https://script.google.com/macros/s/AKfycbwdkG6HR9JTUESjck6bsP_rl3kDND_m-TipNnZq02w22-kvaOc3arji4B4Jd25Tcm_ruw/exec"; // 🔹 reemplaza con tu URL real
+    const APP_URL = "https://script.google.com/macros/s/AKfycbwdkG6HR9JTUESjck6bsP_rl3kDND_m-TipNnZq02w22-kvaOc3arji4B4Jd25Tcm_ruw/exec"; 
 
     document.getElementById("contact-form").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -95,20 +96,20 @@
       // honeypot anti-spam
       if (f._hp && f._hp.value) return;
 
-      const payload = {
-        name: f.name.value.trim(),
-        subject: f.subject.value.trim(),
-        message: f.message.value.trim(),
-        replyTo: "rafita.estudio@gmail.com"
-      };
+      if (!f.email.checkValidity()) {
+        status.textContent = "Ingresa un correo válido.";
+        return;
+      }
+
+      const fd = new FormData();
+      fd.append("email",   f.email.value.trim());   // remitente
+      fd.append("subject", f.subject.value.trim());
+      fd.append("message", f.message.value.trim());
 
       try {
-        await fetch(APP_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
+        await fetch(APP_URL, { method: "POST", mode: "no-cors", body: fd });
 
+        // éxito optimista (con no-cors no podemos leer respuesta)
         status.textContent = "¡Mensaje enviado! Gracias por escribirnos :)";
         f.reset();
       } catch (err) {
