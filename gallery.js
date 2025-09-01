@@ -19,6 +19,8 @@ const images = [
   "ilus_14.PNG",
   "ilus_15.PNG",
   "ilus_16.PNG",
+  "ilus_17.JPG",
+  "ilus_18.JPG",
 ];
 
 // Selecciona el contenedor
