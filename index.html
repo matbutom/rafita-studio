@@ -15,40 +15,61 @@
           alt="Rafita Studio Logo"
         />
       </a>
-<nav>
-  <ul>
-    <li><a href="index.html#work">Work</a></li>
-    <li>
-      <a 
-        href="https://piruetasxyz.myshopify.com/collections/rafita-studio" 
-        target="_blank"
-      >
-        Shop
-      </a>
-    </li>
-    <li><a href="about.html">About Us</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li>
-      <a
-        href="https://instagram.com/rafita.studio"
-        target="_blank"
-        class="instagram-link"
-      >
-        @rafita.studio 
-      </a>
-    </li>
-  </ul>
-</nav>
 
+      <nav>
+        <!-- 🔹 agregamos la clase desktop-nav -->
+        <ul class="desktop-nav">
+          <li><a href="index.html#work">Work</a></li>
+          <li>
+            <a 
+              href="https://piruetasxyz.myshopify.com/collections/rafita-studio" 
+              target="_blank"
+            >
+              Shop
+            </a>
+          </li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>
+            <a
+              href="https://instagram.com/rafita.studio"
+              target="_blank"
+              class="instagram-link"
+            >
+              @rafita.studio 
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- 🔹 botón hamburguesa -->
+      <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Abrir menú">
+        <span class="bar" aria-hidden="true"></span>
+      </button>
+
+      <!-- 🔹 drawer móvil -->
+      <div id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+        <div class="drawer-backdrop" data-close></div>
+        <aside class="drawer-panel" role="dialog" aria-modal="true" aria-label="Menú">
+          <a href="index.html" class="back-home" aria-label="Volver a inicio">← Volver</a>
+          <nav aria-label="Mobile">
+            <!-- se llena con JS al cargar -->
+            <ul class="mobile-nav" id="mobile-nav-list"></ul>
+          </nav>
+        </aside>
+      </div>
     </header>
+
     <main>
-<section id="work">
-  <div class="gallery" id="gallery"></div>
-</section>
+      <section id="work">
+        <div class="gallery" id="gallery"></div>
+      </section>
 
-<script src="gallery.js"></script>
-
+      <script src="gallery.js"></script>
+      <!-- 🔹 tu script para el menú -->
+      <script src="script.js"></script>
     </main>
+
     <footer>
       <p>© 2025 Rafita Studio. Todos los derechos reservados.</p>
     </footer>

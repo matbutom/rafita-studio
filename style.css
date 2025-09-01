@@ -169,7 +169,7 @@ footer {
 .contact-form textarea:focus {
   outline: none;
   border-color: #ff80d9;
-  box-shadow: 0 0 5px rgba(255,128,217,0.5);
+  box-shadow: 0 0 5px rgba(255, 128, 217, 0.5);
 }
 
 .contact-form button {
@@ -189,11 +189,21 @@ footer {
 
 /* Animación tipo stop-motion */
 @keyframes wiggle-stopmotion {
-  0%   { transform: rotate(0deg); }
-  25%  { transform: rotate(5deg); }
-  50%  { transform: rotate(-5deg); }
-  75%  { transform: rotate(3deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .logo img:hover {
@@ -228,6 +238,205 @@ footer {
     column-count: 1;
   }
 }
+
+/* === MENÚ MÓVIL: estilos mínimos === */
+
+/* Botón hamburguesa */
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background: transparent;
+}
+.nav-toggle .bar {
+  position: relative;
+  width: 20px;
+  height: 2px;
+  background: #000;
+}
+.nav-toggle .bar::before,
+.nav-toggle .bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: #000;
+}
+.nav-toggle .bar::before {
+  top: -6px;
+}
+.nav-toggle .bar::after {
+  top: 6px;
+}
+
+/* Drawer (panel deslizante) */
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  display: none;
+}
+.mobile-drawer.is-open {
+  display: block;
+}
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+}
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(88vw, 360px);
+  background: #fff;
+  color: #000;
+  border-left: 1px solid #d4d4d4;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  padding: 20px;
+}
+.mobile-drawer.is-open .drawer-panel {
+  transform: translateX(0);
+}
+
+/* Lista móvil: reusa tu estilo pero con bloque y padding */
+.mobile-nav {
+  list-style: none;
+  margin: 20px 0 0; /* menos margen arriba */
+  padding: 0;
+  display: grid;
+  gap: 4px; /* opciones más pegadas */
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 12px 10px; /* menos padding */
+  font-size: 1.1rem; /* tamaño aún legible en móvil */
+  font-weight: 400; /* peso más liviano */
+  color: inherit;
+  text-decoration: none;
+}
+/* RESPONSIVE:
+   - En móviles: ocultar nav de escritorio, mostrar hamburguesa
+   - En desktop: mostrar nav de escritorio, ocultar hamburguesa y drawer
+*/
+@media (max-width: 899px) {
+  nav ul.desktop-nav {
+    display: none;
+  }
+  .nav-toggle {
+    display: inline-flex;
+  }
+}
+@media (min-width: 900px) {
+  nav ul.desktop-nav {
+    display: flex;
+  } /* mantiene tu estilo existente */
+  .nav-toggle {
+    display: none;
+  }
+  .mobile-drawer {
+    display: none !important;
+  }
+}
+
+.back-home {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+}
+
+.back-home:hover {
+  text-decoration: underline;
+}
+
+/* ===== Animación de apertura del menú móvil ===== */
+
+/* 1) Backdrop: fade */
+@keyframes drawerFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* 2) Panel: slide + overshoot (ligero rebote) */
+@keyframes drawerPanelIn {
+  0%   { transform: translateX(12%) scale(.98); opacity: 0; }
+  60%  { transform: translateX(0)   scale(1.01); opacity: 1; }
+  100% { transform: translateX(0)   scale(1); }
+}
+
+/* 3) Items: aparición en cascada */
+@keyframes drawerItemIn {
+  from { transform: translateY(6px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+/* Aplica animaciones cuando el drawer está abierto */
+.mobile-drawer.is-open .drawer-backdrop {
+  animation: drawerFadeIn 220ms ease-out both;
+}
+.mobile-drawer.is-open .drawer-panel {
+  animation: drawerPanelIn 320ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+/* Cascada a los <li> del menú móvil */
+.mobile-drawer.is-open .mobile-nav li {
+  opacity: 0; /* estado inicial para que la animación tenga efecto */
+  animation: drawerItemIn 300ms ease-out forwards;
+}
+
+/* Delays escalonados (ajusta si tienes más/menos items) */
+.mobile-drawer.is-open .mobile-nav li:nth-child(1) { animation-delay: 60ms; }
+.mobile-drawer.is-open .mobile-nav li:nth-child(2) { animation-delay: 120ms; }
+.mobile-drawer.is-open .mobile-nav li:nth-child(3) { animation-delay: 180ms; }
+.mobile-drawer.is-open .mobile-nav li:nth-child(4) { animation-delay: 240ms; }
+.mobile-drawer.is-open .mobile-nav li:nth-child(5) { animation-delay: 300ms; }
+
+/* Opcional: la flecha "Volver" también anima */
+.mobile-drawer.is-open .back-home {
+  animation: drawerItemIn 280ms ease-out both 40ms;
+}
+
+/* Prefiere menos movimiento: desactiva animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-drawer.is-open .drawer-backdrop,
+  .mobile-drawer.is-open .drawer-panel,
+  .mobile-drawer.is-open .mobile-nav li,
+  .mobile-drawer.is-open .back-home {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+/* Animaciones de salida */
+@keyframes drawerFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes drawerPanelOut {
+  0%   { transform: translateX(0) scale(1); opacity: 1; }
+  100% { transform: translateX(100%) scale(.98); opacity: 0; }
+}
+
+/* Estado de salida */
+.mobile-drawer.is-closing .drawer-backdrop {
+  animation: drawerFadeOut 200ms ease-out forwards;
+}
+.mobile-drawer.is-closing .drawer-panel {
+  animation: drawerPanelOut 280ms ease-in forwards;
+}
+
+/* ===== Estilo enlace Instagram en el footer ===== */
 
 .instagram-link {
   font-weight: 400;
